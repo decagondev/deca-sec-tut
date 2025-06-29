@@ -1,6 +1,7 @@
 services:
   sec-env:
     build: .
+    platform: linux/amd64
     container_name: security-tutorial-env
     volumes:
       - .:/workspace
