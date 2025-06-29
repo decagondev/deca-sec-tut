@@ -45,11 +45,7 @@ RUN apt-get update && apt-get install -y \
     telnet \
     openssh-client \
     file \
-    strings \
-    objdump \
-    readelf \
-    nm \
-    ldd \
+    binutils \
     && rm -rf /var/lib/apt/lists/*
 
 # Install radare2 from git
