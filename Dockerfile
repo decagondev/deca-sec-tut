@@ -48,11 +48,15 @@ RUN apt-get update && apt-get install -y \
     binutils \
     && rm -rf /var/lib/apt/lists/*
 
-# Install radare2 from git
-RUN git clone https://github.com/radareorg/radare2.git /tmp/radare2 && \
+# Install radare2 - try package manager first, then from source if needed
+RUN apt-get update && apt-get install -y radare2 && rm -rf /var/lib/apt/lists/* || \
+    (git clone https://github.com/radareorg/radare2.git /tmp/radare2 && \
     cd /tmp/radare2 && \
-    sys/install.sh && \
-    rm -rf /tmp/radare2
+    ./configure --prefix=/usr/local && \
+    make -j$(nproc) && \
+    make install && \
+    rm -rf /tmp/radare2 && \
+    ldconfig)
 
 RUN git clone https://github.com/pwndbg/pwndbg.git /opt/pwndbg && \
     cd /opt/pwndbg && \
