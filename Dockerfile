@@ -77,10 +77,7 @@ RUN pip3 install --no-cache-dir \
     frida-tools
 
 RUN apt-get update && apt-get install -y \
-    volatility3 \
-    volatility3-plugins \
     yara \
-    yara-python \
     foremost \
     scalpel \
     testdisk \
