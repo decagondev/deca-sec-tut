@@ -2,6 +2,11 @@ FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Set locale and encoding for Unicode support
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+ENV PYTHONIOENCODING=utf-8
+
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 ENV PATH=$PATH:$JAVA_HOME/bin
 
@@ -58,9 +63,8 @@ RUN apt-get update && apt-get install -y radare2 && rm -rf /var/lib/apt/lists/* 
     rm -rf /tmp/radare2 && \
     ldconfig)
 
-RUN git clone https://github.com/pwndbg/pwndbg.git /opt/pwndbg && \
-    cd /opt/pwndbg && \
-    ./setup.sh
+RUN wget -O ~/.gdbinit-gef.py -q https://gef.blah.cat/py && \
+    echo 'source ~/.gdbinit-gef.py' >> /root/.gdbinit
 
 RUN pip3 install --no-cache-dir \
     pwntools \
@@ -116,12 +120,12 @@ WORKDIR /workspace
 
 COPY . /workspace/
 
-RUN echo "source /opt/pwndbg/gdbinit.py" >> /root/.gdbinit
+# Note: GEF is configured above via .gdbinit
 
 RUN echo '#!/bin/bash\n\
 echo "=== CLI Security Analysis Environment ==="\n\
 echo "Available CLI tools:"\n\
-echo "- pwndbg: gdb (with pwndbg loaded)"\n\
+echo "- gef: gdb (with GEF loaded)"\n\
 echo "- pwntools: python3 -c \"import pwn; print(\"pwntools available\")\""\n\
 echo "- radare2: r2"\n\
 echo "- binwalk: binwalk"\n\

@@ -55,6 +55,20 @@
                 </svg>
                 Learning Objectives
             </h2>
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-yellow-700">
+                            <strong>Compatibility Note:</strong> GDB debugging features may not work on Apple Silicon (M1/M2/M3) due to emulation limitations. Intel/AMD64 systems and static analysis tools work fine on all platforms.
+                        </p>
+                    </div>
+                </div>
+            </div>
             <div class="grid md:grid-cols-2 gap-4">
                 <div class="flex items-start space-x-3">
                     <div class="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
@@ -66,7 +80,7 @@
                 </div>
                 <div class="flex items-start space-x-3">
                     <div class="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                    <p class="text-gray-700">Debug with GDB + pwndbg to inspect runtime behavior</p>
+                    <p class="text-gray-700">Debug with GDB + GEF to inspect runtime behavior</p>
                 </div>
                 <div class="flex items-start space-x-3">
                     <div class="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
@@ -99,7 +113,7 @@
                 </div>
                 <h3 class="text-xl font-bold text-gray-800 mb-3">CLI Debugging</h3>
                 <p class="text-gray-600">
-                    Step through programs, inspect memory, and modify execution using GDB with pwndbg. Enhanced debugging with features like stack visualization and register inspection.
+                    Step through programs, inspect memory, and modify execution using GDB with GEF. Enhanced debugging with features like stack visualization and register inspection.
                 </p>
             </div>
 
@@ -141,7 +155,7 @@
                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <h4 class="font-semibold text-gray-800">GDB + pwndbg</h4>
+                    <h4 class="font-semibold text-gray-800">GDB + GEF</h4>
                     <p class="text-sm text-gray-600">Enhanced debugger</p>
                 </div>
                 <div class="text-center p-4 bg-purple-50 rounded-lg">
@@ -186,6 +200,20 @@ docker-compose exec sec-env bash
 cd /workspace
 file static/example1
 strings static/example1</code></pre>
+                </div>
+                <div class="bg-red-50 border-l-4 border-red-400 p-4 mt-4">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-red-700">
+                                <strong>Apple Silicon Limitation:</strong> GDB debugging may not work properly on Apple Silicon (M1/M2/M3) devices due to x86_64 emulation limitations. Static analysis tools like <code class="bg-red-100 px-1 rounded">objdump</code>, <code class="bg-red-100 px-1 rounded">strings</code>, and <code class="bg-red-100 px-1 rounded">radare2</code> will work fine.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -256,9 +284,9 @@ q</code></pre>
 
             <!-- GDB Debugging -->
             <div class="mb-8">
-                <h3 class="text-2xl font-bold text-gray-700 mb-4">4. Debug with GDB + pwndbg</h3>
+                <h3 class="text-2xl font-bold text-gray-700 mb-4">4. Debug with GDB + GEF</h3>
                 <div class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto">
-                    <pre><code class="language-bash"># Start GDB with pwndbg
+                    <pre><code class="language-bash"># Start GDB with GEF
 gdb static/example1
 
 # Set breakpoint at main
@@ -290,7 +318,7 @@ Enter input: test
 (gdb) quit</code></pre>
                 </div>
                 <p class="text-gray-600 mt-4">
-                    pwndbg enhances GDB with features like colored output, better stack visualization, and exploit development helpers.
+                    GEF enhances GDB with features like colored output, better stack visualization, and exploit development helpers.
                 </p>
             </div>
         </div>
@@ -338,7 +366,7 @@ Enter input: test
                 </div>
                 <div class="flex items-start space-x-3">
                     <div class="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-                    <p>GDB with pwndbg allows runtime analysis of registers, stack, and memory</p>
+                    <p>GDB with GEF allows runtime analysis of registers, stack, and memory</p>
                 </div>
                 <div class="flex items-start space-x-3">
                     <div class="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
