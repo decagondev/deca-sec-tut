@@ -29,6 +29,7 @@
                 <h1 class="text-2xl font-bold">CTF Tutorials</h1>
                 <div class="flex space-x-4">
                     <a href="#home" class="bg-white bg-opacity-20 px-3 py-1 rounded">Home</a>
+                    <a href="#setup" class="hover:text-blue-200 transition-colors">Setup</a>
                     <a href="#tutorials" class="hover:text-blue-200 transition-colors">Tutorials</a>
                     <a href="#about" class="hover:text-blue-200 transition-colors">About</a>
                 </div>
@@ -44,18 +45,132 @@
                 Learn reverse engineering, binary exploitation, and JavaScript security through hands-on tutorials designed for CTF challenges and real-world security research.
             </p>
             <div class="flex justify-center space-x-4">
-                <a href="#tutorials" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-                    Start Learning
+                <a href="#setup" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                    Get Started
                 </a>
-                <a href="#about" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
-                    Learn More
+                <a href="#tutorials" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
+                    View Tutorials
                 </a>
             </div>
         </div>
     </section>
 
+    <!-- Setup Section -->
+    <section id="setup" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-bold text-gray-800 text-center mb-12">🚀 Quick Setup Guide</h2>
+                <p class="text-lg text-gray-600 text-center mb-12">
+                    Before starting any tutorials, you need to set up your local development environment. 
+                    Follow these steps to get everything ready for hands-on learning.
+                </p>
+                
+                <!-- Setup Steps -->
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <!-- Step 1: Clone Repository -->
+                    <div class="bg-blue-50 rounded-lg p-6 border-l-4 border-blue-500">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3">1</div>
+                            <h3 class="text-xl font-bold text-gray-800">Clone the Repository</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Clone the tutorial repository to your local machine to get all the example files and Docker configuration.
+                        </p>
+                        <div class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto">
+                            <pre><code class="language-bash">git clone https://github.com/decagondev/deca-sec-tut.git
+cd deca-sec-tut</code></pre>
+                        </div>
+                        <div class="mt-4">
+                            <a href="https://github.com/decagondev/deca-sec-tut" target="_blank" class="inline-flex items-center text-blue-600 hover:text-blue-800">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"></path>
+                                </svg>
+                                View on GitHub
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Start Docker Environment -->
+                    <div class="bg-green-50 rounded-lg p-6 border-l-4 border-green-500">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3">2</div>
+                            <h3 class="text-xl font-bold text-gray-800">Start Docker Environment</h3>
+                        </div>
+                        <p class="text-gray-600 mb-4">
+                            Use Docker Compose to start the pre-configured security analysis environment with all tools installed.
+                        </p>
+                        <div class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto">
+                            <pre><code class="language-bash">docker-compose up -d
+docker-compose exec sec-env bash</code></pre>
+                        </div>
+                        <div class="mt-4">
+                            <a href="README.md" class="inline-flex items-center text-green-600 hover:text-green-800">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                                </svg>
+                                Read Full Documentation
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prerequisites -->
+                <div class="bg-yellow-50 rounded-lg p-6 border-l-4 border-yellow-500 mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                        <svg class="w-6 h-6 text-yellow-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                        Prerequisites
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-center">
+                                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Docker and Docker Compose installed
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Git installed
+                            </li>
+                        </ul>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-center">
+                                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                Basic command line knowledge
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                At least 4GB RAM available
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Ready to Start -->
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Ready to Start Learning?</h3>
+                    <p class="text-gray-600 mb-6">
+                        Once you've completed the setup, you're ready to dive into the tutorials. 
+                        Each tutorial includes hands-on exercises with the tools available in your Docker environment.
+                    </p>
+                    <a href="#tutorials" class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                        Explore Tutorials
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Tutorials Section -->
-    <section id="tutorials" class="py-20">
+    <section id="tutorials" class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
             <h2 class="text-4xl font-bold text-gray-800 text-center mb-12">Choose Your Path</h2>
             
@@ -67,28 +182,28 @@
                             <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Reverse Engineering & Debugging</h3>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">CLI Reverse Engineering & Debugging</h3>
                     <p class="text-gray-600 mb-6">
-                        Master Ghidra and GDB to analyze binaries and DLLs. Learn essential skills for crackme challenges and Windows DLL hijacking.
+                        Master command-line tools like objdump, readelf, strings, and Radare2 to analyze binaries. Learn essential skills for crackme challenges using GDB + pwndbg.
                     </p>
                     <ul class="space-y-2 mb-6">
                         <li class="flex items-center text-sm text-gray-600">
                             <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            Binary structure and assembly
+                            Binary structure and assembly analysis
                         </li>
                         <li class="flex items-center text-sm text-gray-600">
                             <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            Ghidra decompilation
+                            CLI tools: objdump, readelf, strings
                         </li>
                         <li class="flex items-center text-sm text-gray-600">
                             <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            GDB debugging techniques
+                            GDB + pwndbg debugging techniques
                         </li>
                     </ul>
                     <a href="tutorial1.html" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
@@ -103,9 +218,9 @@
                             <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Binary Exploitation</h3>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">CLI Binary Exploitation</h3>
                     <p class="text-gray-600 mb-6">
-                        Learn advanced exploitation techniques including buffer overflows, format string vulnerabilities, and Return-Oriented Programming (ROP).
+                        Learn advanced exploitation techniques using command-line tools including buffer overflows, format string vulnerabilities, and Return-Oriented Programming (ROP).
                     </p>
                     <ul class="space-y-2 mb-6">
                         <li class="flex items-center text-sm text-gray-600">
@@ -124,7 +239,7 @@
                             <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            ROP chain building
+                            ROP chain building with ROPgadget
                         </li>
                     </ul>
                     <a href="tutorial2.html" class="inline-block bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors font-semibold">
@@ -139,28 +254,28 @@
                             <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">JavaScript Security</h3>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">CLI JavaScript Security</h3>
                     <p class="text-gray-600 mb-6">
-                        Master web security vulnerabilities including XSS, DOM clobbering, JSONP, and prototype pollution for modern web applications.
+                        Master web security vulnerabilities using command-line tools including XSS, DOM clobbering, JSONP, and prototype pollution for modern web applications.
                     </p>
                     <ul class="space-y-2 mb-6">
                         <li class="flex items-center text-sm text-gray-600">
                             <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            Cross-Site Scripting (XSS)
+                            XSS testing with curl and Python
                         </li>
                         <li class="flex items-center text-sm text-gray-600">
                             <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            DOM clobbering techniques
+                            DOM clobbering with Node.js
                         </li>
                         <li class="flex items-center text-sm text-gray-600">
                             <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            Prototype pollution
+                            Prototype pollution testing
                         </li>
                     </ul>
                     <a href="tutorial3.html" class="inline-block bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-semibold">
@@ -183,7 +298,7 @@
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Hands-On Learning</h3>
-                    <p class="text-gray-600">Practice with real examples and downloadable files to reinforce your understanding.</p>
+                    <p class="text-gray-600">Practice with real examples and pre-configured Docker environment to reinforce your understanding.</p>
                 </div>
                 <div class="text-center">
                     <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -191,8 +306,8 @@
                             <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Modern Tools</h3>
-                    <p class="text-gray-600">Learn with industry-standard tools like Ghidra, GDB, and modern web security techniques.</p>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">CLI-First Approach</h3>
+                    <p class="text-gray-600">Learn with command-line tools like objdump, GDB, curl, and Python for automation and scripting.</p>
                 </div>
                 <div class="text-center">
                     <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -214,7 +329,7 @@
                 <h2 class="text-4xl font-bold text-gray-800 mb-8">About CTF Tutorials</h2>
                 <p class="text-lg text-gray-600 mb-8">
                     Our comprehensive tutorial series is designed to take you from beginner to advanced in cybersecurity skills. 
-                    Each tutorial focuses on practical, hands-on learning with real-world applications.
+                    Each tutorial focuses on practical, hands-on learning with real-world applications using command-line tools.
                 </p>
                 <div class="grid md:grid-cols-2 gap-8 mt-12">
                     <div class="bg-white p-6 rounded-lg shadow-lg">
@@ -230,7 +345,7 @@
                                 <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                 </svg>
-                                Linux environment (Docker provided)
+                                Docker environment (provided)
                             </li>
                             <li class="flex items-center">
                                 <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -247,7 +362,7 @@
                                 <svg class="w-4 h-4 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                 </svg>
-                                Reverse engineering skills
+                                CLI reverse engineering skills
                             </li>
                             <li class="flex items-center">
                                 <svg class="w-4 h-4 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -275,28 +390,28 @@
                 <div>
                     <h3 class="text-xl font-bold mb-4">CTF Tutorials</h3>
                     <p class="text-gray-300">
-                        Master the art of cybersecurity through hands-on learning and practical experience.
+                        Master the art of cybersecurity through hands-on learning and practical experience with CLI tools.
                     </p>
                 </div>
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
                     <ul class="space-y-2">
+                        <li><a href="#setup" class="text-gray-300 hover:text-white transition-colors">Setup Guide</a></li>
                         <li><a href="#tutorials" class="text-gray-300 hover:text-white transition-colors">Tutorials</a></li>
                         <li><a href="#about" class="text-gray-300 hover:text-white transition-colors">About</a></li>
-                        <li><a href="README.md" class="text-gray-300 hover:text-white transition-colors">Documentation</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Resources</h4>
                     <ul class="space-y-2">
+                        <li><a href="https://github.com/decagondev/deca-sec-tut" target="_blank" class="text-gray-300 hover:text-white transition-colors">GitHub Repository</a></li>
+                        <li><a href="README.md" class="text-gray-300 hover:text-white transition-colors">Documentation</a></li>
                         <li><a href="static/example1" class="text-gray-300 hover:text-white transition-colors">Example Binary 1</a></li>
-                        <li><a href="static/example2" class="text-gray-300 hover:text-white transition-colors">Example Binary 2</a></li>
-                        <li><a href="static/example.html" class="text-gray-300 hover:text-white transition-colors">Example HTML</a></li>
                     </ul>
                 </div>
             </div>
             <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-                <p>&copy; 2024 CTF Tutorials. Master the art of cybersecurity.</p>
+                <p>&copy; 2024 CTF Tutorials. Master the art of CLI cybersecurity.</p>
             </div>
         </div>
     </footer>
