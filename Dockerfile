@@ -106,10 +106,7 @@ RUN pip3 install --no-cache-dir \
     ropgadget \
     pwntools
 
-RUN apt-get update && apt-get install -y \
-    ghidra-headless \
-    cutter-headless \
-    && rm -rf /var/lib/apt/lists/*
+# Note: Ghidra and Cutter require manual installation from their respective repositories
 
 WORKDIR /workspace
 
@@ -138,7 +135,6 @@ echo "- strings: strings"\n\
 echo "- file: file"\n\
 echo "- ldd: ldd"\n\
 echo "- nm: nm"\n\
-echo "- ghidra-headless: ghidra-headless"\n\
 echo ""\n\
 echo "Your project files are in /workspace"\n\
 echo "Start with: cd /workspace"\n\
