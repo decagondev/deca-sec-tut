@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial 1: CLI Reverse Engineering and Debugging Basics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-bold">CTF Tutorials</h1>
+                <div class="flex space-x-4">
+                    <a href="/" class="hover:text-blue-200 transition-colors">Home</a>
+                    <a href="tutorial1.html" class="bg-white bg-opacity-20 px-3 py-1 rounded">Tutorial 1</a>
+                    <a href="tutorial2.html" class="hover:text-blue-200 transition-colors">Tutorial 2</a>
+                    <a href="tutorial3.html" class="hover:text-blue-200 transition-colors">Tutorial 3</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-8">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-bold text-gray-800 mb-4">CLI Reverse Engineering and Debugging Basics</h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Master the fundamentals of reverse engineering and debugging using command-line tools. Essential skills for analyzing binaries, understanding assembly, and tackling crackme challenges.
+            </p>
+        </div>
+
+        <!-- Objectives Card -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8 card-hover">
+            <h2 class="text-3xl font-bold text-blue-600 mb-6 flex items-center">
+                <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                Learning Objectives
+            </h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <p class="text-gray-700">Understand binary structure and assembly using CLI tools</p>
+                </div>
+                <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <p class="text-gray-700">Use objdump, readelf, and strings to analyze binaries</p>
+                </div>
+                <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <p class="text-gray-700">Debug with GDB + pwndbg to inspect runtime behavior</p>
+                </div>
+                <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <p class="text-gray-700">Use Radare2 for advanced binary analysis</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Concepts Section -->
+        <div class="grid lg:grid-cols-3 gap-8 mb-8">
+            <!-- Reverse Engineering -->
+            <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                <div class="text-blue-600 mb-4">
+                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">CLI Reverse Engineering</h3>
+                <p class="text-gray-600">
+                    Analyze compiled binaries using command-line tools. objdump disassembles code, readelf shows ELF structure, strings extracts text, and Radare2 provides advanced analysis capabilities.
+                </p>
+            </div>
+
+            <!-- Debugging -->
+            <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                <div class="text-green-600 mb-4">
+                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">CLI Debugging</h3>
+                <p class="text-gray-600">
+                    Step through programs, inspect memory, and modify execution using GDB with pwndbg. Enhanced debugging with features like stack visualization and register inspection.
+                </p>
+            </div>
+
+            <!-- Binary Analysis -->
+            <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
+                <div class="text-purple-600 mb-4">
+                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Binary Analysis</h3>
+                <p class="text-gray-600">
+                    Use file, ldd, nm, and other CLI tools to understand binary structure, dependencies, symbols, and identify potential vulnerabilities in compiled programs.
+                </p>
+            </div>
+        </div>
+
+        <!-- Tools Section -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8 card-hover">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                <svg class="w-8 h-8 mr-3 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
+                </svg>
+                Essential CLI Tools
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="text-center p-4 bg-blue-50 rounded-lg">
+                    <div class="text-blue-600 mb-2">
+                        <svg class="w-8 h-8 mx-auto" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="font-semibold text-gray-800">objdump</h4>
+                    <p class="text-sm text-gray-600">Disassemble binaries</p>
+                </div>
+                <div class="text-center p-4 bg-green-50 rounded-lg">
+                    <div class="text-green-600 mb-2">
+                        <svg class="w-8 h-8 mx-auto" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h4 class="font-semibold text-gray-800">GDB + pwndbg</h4>
+                    <p class="text-sm text-gray-600">Enhanced debugger</p>
+                </div>
+                <div class="text-center p-4 bg-purple-50 rounded-lg">
+                    <div class="text-purple-600 mb-2">
+                        <svg class="w-8 h-8 mx-auto" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h4 class="font-semibold text-gray-800">Radare2</h4>
+                    <p class="text-sm text-gray-600">Advanced binary analysis</p>
+                </div>
+                <div class="text-center p-4 bg-yellow-50 rounded-lg">
+                    <div class="text-yellow-600 mb-2">
+                        <svg class="w-8 h-8 mx-auto" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h4 class="font-semibold text-gray-800">strings</h4>
+                    <p class="text-sm text-gray-600">Extract text from binaries</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Practical Exercise -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8 card-hover">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                <svg class="w-8 h-8 mr-3 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clip-rule="evenodd"></path>
+                </svg>
+                Practical Exercise
+            </h2>
+            
+            <!-- Setup -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold text-gray-700 mb-4">1. Setup</h3>
+                <div class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto">
+                    <pre><code class="language-bash"># Start the Docker container
+docker-compose up -d
+docker-compose exec sec-env bash
+
+# Navigate to workspace and examine the binary
+cd /workspace
+file static/example1
+strings static/example1</code></pre>
+                </div>
+            </div>
+
+            <!-- Binary Analysis -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold text-gray-700 mb-4">2. Analyze with CLI Tools</h3>
+                <div class="bg-gray-900 text-blue-400 p-4 rounded-lg overflow-x-auto mb-4">
+                    <pre><code class="language-bash"># Get file information
+file static/example1
+
+# View strings in the binary
+strings static/example1
+
+# Disassemble the main function
+objdump -d static/example1 | grep -A 20 "&lt;main&gt;:"
+
+# View ELF headers
+readelf -h static/example1
+
+# View symbols
+nm static/example1
+
+# View shared library dependencies
+ldd static/example1</code></pre>
+                </div>
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-yellow-700">
+                                <strong>Security Note:</strong> Look for calls to unsafe functions like <code class="bg-yellow-100 px-1 rounded">gets</code> or <code class="bg-yellow-100 px-1 rounded">strcpy</code> in the disassembly.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Radare2 Analysis -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold text-gray-700 mb-4">3. Advanced Analysis with Radare2</h3>
+                <div class="bg-gray-900 text-purple-400 p-4 rounded-lg overflow-x-auto">
+                    <pre><code class="language-bash"># Start Radare2 analysis
+r2 -A static/example1
+
+# In r2, analyze all
+aa
+
+# List functions
+afl
+
+# Disassemble main function
+pdf @main
+
+# View cross-references
+axt @main
+
+# Exit r2
+q</code></pre>
+                </div>
+                <p class="text-gray-600 mt-4">
+                    Radare2 provides powerful analysis capabilities including function identification, cross-references, and graph visualization.
+                </p>
+            </div>
+
+            <!-- GDB Debugging -->
+            <div class="mb-8">
+                <h3 class="text-2xl font-bold text-gray-700 mb-4">4. Debug with GDB + pwndbg</h3>
+                <div class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto">
+                    <pre><code class="language-bash"># Start GDB with pwndbg
+gdb static/example1
+
+# Set breakpoint at main
+(gdb) break main
+(gdb) run
+
+# When prompted, enter test input
+Enter input: test
+
+# Inspect registers
+(gdb) info registers
+
+# View disassembly at current location
+(gdb) x/10i $rip
+
+# Step through instructions
+(gdb) stepi
+
+# View stack
+(gdb) stack
+
+# View memory at stack pointer
+(gdb) x/16xb $rsp
+
+# Continue execution
+(gdb) continue
+
+# Exit GDB
+(gdb) quit</code></pre>
+                </div>
+                <p class="text-gray-600 mt-4">
+                    pwndbg enhances GDB with features like colored output, better stack visualization, and exploit development helpers.
+                </p>
+            </div>
+        </div>
+
+        <!-- Example Code -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8 card-hover">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                <svg class="w-8 h-8 mr-3 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                </svg>
+                Practice Exercises
+            </h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-blue-800 mb-2">CLI Analysis Practice</h4>
+                    <p class="text-blue-700 text-sm">Use <code class="bg-blue-100 px-1 rounded">objdump</code> and <code class="bg-blue-100 px-1 rounded">strings</code> to identify the password in the binary.</p>
+                </div>
+                <div class="bg-green-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-green-800 mb-2">GDB Practice</h4>
+                    <p class="text-green-700 text-sm">Use GDB to set a breakpoint and inspect the stack when input overflows the buffer.</p>
+                </div>
+                <div class="bg-purple-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-purple-800 mb-2">Radare2 Practice</h4>
+                    <p class="text-purple-800 text-sm">Use Radare2 to find all function calls and identify the vulnerable function.</p>
+                </div>
+                <div class="bg-yellow-50 p-4 rounded-lg">
+                    <h4 class="font-semibold text-yellow-800 mb-2">Binary Structure</h4>
+                    <p class="text-yellow-700 text-sm">Use <code class="bg-yellow-100 px-1 rounded">readelf</code> and <code class="bg-yellow-100 px-1 rounded">nm</code> to understand the binary's structure.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Takeaways -->
+        <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg shadow-lg p-8 mb-8 text-white">
+            <h2 class="text-3xl font-bold mb-6 flex items-center">
+                <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                Key Takeaways
+            </h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                    <p>CLI tools like objdump, readelf, and strings provide powerful binary analysis capabilities</p>
+                </div>
+                <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                    <p>GDB with pwndbg allows runtime analysis of registers, stack, and memory</p>
+                </div>
+                <div class="flex items-start space-x-3">
+                    <div class="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                    <p>Radare2 offers advanced features for function analysis and cross-references</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Further Reading -->
+        <div class="bg-white rounded-lg shadow-lg p-8 card-hover">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                <svg class="w-8 h-8 mr-3 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Further Reading
+            </h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <a href="https://man7.org/linux/man-pages/man1/objdump.1.html" target="_blank" class="block p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+                    <h4 class="font-semibold text-blue-800 mb-2">objdump Manual</h4>
+                    <p class="text-blue-700 text-sm">Complete objdump documentation and options</p>
+                </a>
+                <a href="https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf" target="_blank" class="block p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
+                    <h4 class="font-semibold text-green-800 mb-2">GDB Cheat Sheet</h4>
+                    <p class="text-green-700 text-sm">Comprehensive GDB command reference</p>
+                </a>
+                <a href="https://radare.gitbooks.io/radare2book/" target="_blank" class="block p-4 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
+                    <h4 class="font-semibold text-purple-800 mb-2">Radare2 Book</h4>
+                    <p class="text-purple-700 text-sm">Official Radare2 documentation and tutorials</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 CTF Tutorials. Master the art of CLI reverse engineering and debugging.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Prism.js for syntax highlighting
+        Prism.highlightAll();
+    </script>
+</body>
+</html> 

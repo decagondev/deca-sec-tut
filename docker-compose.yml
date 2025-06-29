@@ -1,0 +1,13 @@
+services:
+  sec-env:
+    build: .
+    container_name: security-tutorial-env
+    volumes:
+      - .:/workspace
+      - ~/.ssh:/root/.ssh:ro  # Optional: for SSH access to other systems
+    ports:
+      - "8080:8080"  # For web-based tools if needed
+    stdin_open: true
+    tty: true
+    working_dir: /workspace
+    command: /usr/local/bin/startup.sh /bin/bash 
