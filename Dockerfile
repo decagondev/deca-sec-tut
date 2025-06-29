@@ -72,7 +72,7 @@ RUN pip3 install --no-cache-dir \
     pycryptodome \
     cryptography \
     pefile \
-    elftools \
+    pyelftools \
     lief \
     frida-tools
 
@@ -103,7 +103,7 @@ RUN pip3 install --no-cache-dir \
     pycryptodome \
     cryptography \
     pefile \
-    elftools \
+    pyelftools \
     lief \
     frida-tools \
     ropgadget \
