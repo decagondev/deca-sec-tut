@@ -31,7 +31,6 @@ RUN apt-get update && apt-get install -y \
 
 RUN apt-get update && apt-get install -y \
     gdb \
-    radare2 \
     binwalk \
     hexedit \
     xxd \
@@ -52,6 +51,12 @@ RUN apt-get update && apt-get install -y \
     nm \
     ldd \
     && rm -rf /var/lib/apt/lists/*
+
+# Install radare2 from git
+RUN git clone https://github.com/radareorg/radare2.git /tmp/radare2 && \
+    cd /tmp/radare2 && \
+    sys/install.sh && \
+    rm -rf /tmp/radare2
 
 RUN git clone https://github.com/pwndbg/pwndbg.git /opt/pwndbg && \
     cd /opt/pwndbg && \
